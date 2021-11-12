@@ -26,7 +26,7 @@ export default function Home() {
       <div id='scrollableDiv' className='md:w-1/2'>
         {data && (
           <InfiniteScroll
-            dataLength={data.pages[0].meta.hits}
+            dataLength={data.pages.length}
             next={fetchNextPage}
             hasMore={hasNextPage}
             loader={<Loader variant='dots' className='my-5 mx-auto' />}
