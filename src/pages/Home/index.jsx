@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDebouncedValue } from '@mantine/hooks';
 
 import { useFetchNews } from '../../hooks/useFetchNews';
@@ -13,8 +13,10 @@ import { Loader } from '@mantine/core';
 export default function Home() {
   const [value, setValue] = useState('');
   const [debounced] = useDebouncedValue(value, 300);
-  const { data, fetchNextPage, hasNextPage } = useFetchNews({ q: 'react' });
-  console.log('data', data);
+  const { data, fetchNextPage, hasNextPage, refetch } = useFetchNews({ q: debounced || 'react' });
+  useEffect(() => {
+    refetch({ refetchPage: (page, index) => index === 0 });
+  }, [debounced]);
   return (
     <div className=' flex flex-col justify-center items-center mx-3 md:mx-0'>
       <input
