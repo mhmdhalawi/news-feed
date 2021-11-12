@@ -28,7 +28,7 @@ export default function Home() {
             <NewsCard
               key={item._id}
               title={item.headline.main}
-              summary={item.snippet}
+              summary={item.abstract}
               image={image}
             />
           );
