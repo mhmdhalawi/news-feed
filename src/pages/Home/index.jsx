@@ -31,12 +31,12 @@ export default function Home() {
         className='w-full md:w-1/3 p-2 text-sm my-4 pl-5 border border-blue-400 rounded-[25px]  focus:outline-none'
         placeholder='Search for news'
       />
-      <div id='scrollableDiv' className='md:w-1/2'>
+      <div id='scrollableDiv'>
         {isLoading ? (
           <Loader variant='dots' className='my-5 mx-auto' />
         ) : (
           <InfiniteScroll
-            dataLength={data.pages.length}
+            dataLength={data?.pages?.length}
             next={fetchNextPage}
             hasMore={hasNextPage}
             loader={<Loader variant='dots' className='my-5 mx-auto' />}
