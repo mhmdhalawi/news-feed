@@ -9,12 +9,17 @@ import { image_url } from '../../constants';
 
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Loader } from '@mantine/core';
+import { useQueryClient } from 'react-query';
 
 export default function Home() {
   const [value, setValue] = useState('');
   const [debounced] = useDebouncedValue(value, 300);
-  const { data, fetchNextPage, hasNextPage, refetch } = useFetchNews({ q: debounced || 'react' });
+  const { data, fetchNextPage, hasNextPage, refetch, isLoading } = useFetchNews({
+    q: debounced || 'react',
+  });
+  let queryClient = useQueryClient();
   useEffect(() => {
+    queryClient.removeQueries('news');
     refetch({ refetchPage: (page, index) => index === 0 });
   }, [debounced]);
   return (
@@ -23,10 +28,13 @@ export default function Home() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         type='text'
-        className='w-full md:w-1/3 p-3 border border-blue-300 rounded mt-3 '
+        className='w-full md:w-1/3 p-2 text-sm my-4 pl-5 border border-blue-400 rounded-[25px]  focus:outline-none'
+        placeholder='Search for news'
       />
       <div id='scrollableDiv' className='md:w-1/2'>
-        {data && (
+        {isLoading ? (
+          <Loader variant='dots' className='my-5 mx-auto' />
+        ) : (
           <InfiniteScroll
             dataLength={data.pages.length}
             next={fetchNextPage}
