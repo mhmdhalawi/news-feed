@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { MantineProvider } from '@mantine/core';
-import { QueryClientProvider } from './React-Query';
+import { QueryClientProvide } from './React-Query';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <QueryClientProvider>
+    <QueryClientProvide>
       <MantineProvider>
         <App />
       </MantineProvider>
-    </QueryClientProvider>
+    </QueryClientProvide>
   </React.StrictMode>,
   document.getElementById('root')
 );
