@@ -11,6 +11,8 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { Loader } from '@mantine/core';
 import { useQueryClient } from 'react-query';
 
+import SkeletonList from '../../components/SkeletonList';
+
 export default function Home() {
   const [value, setValue] = useState('');
   const [debounced] = useDebouncedValue(value, 300);
@@ -23,7 +25,6 @@ export default function Home() {
     refetch({ refetchPage: (page, index) => index === 0 });
   }, [debounced]);
 
-  console.log(data);
   return (
     <div className=' flex flex-col justify-center items-center mx-3 md:mx-0'>
       <input
@@ -33,9 +34,10 @@ export default function Home() {
         className='w-full md:w-1/3 p-2 text-sm my-4 pl-5 border border-blue-400 rounded-[25px]  focus:outline-none'
         placeholder='Search for news'
       />
-      <div id='scrollableDiv'>
+
+      <div id='scrollableDiv' className='w-full'>
         {isLoading ? (
-          <Loader variant='dots' className='my-5 mx-auto' />
+          <SkeletonList />
         ) : (
           <InfiniteScroll
             dataLength={data?.pages?.length}
