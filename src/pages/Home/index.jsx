@@ -22,6 +22,8 @@ export default function Home() {
     queryClient.removeQueries('news');
     refetch({ refetchPage: (page, index) => index === 0 });
   }, [debounced]);
+
+  console.log(data);
   return (
     <div className=' flex flex-col justify-center items-center mx-3 md:mx-0'>
       <input
@@ -48,6 +50,7 @@ export default function Home() {
                 return (
                   <NewsCard
                     key={item._id}
+                    id={item._id}
                     title={item.headline.main}
                     summary={item.abstract}
                     image={image}
