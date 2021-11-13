@@ -13,18 +13,28 @@ import { useQueryClient } from 'react-query';
 
 import SkeletonList from '../../components/SkeletonList';
 
+import { useStore } from '../../store';
+
 export default function Home() {
   const [value, setValue] = useState('');
   const [debounced] = useDebouncedValue(value, 300);
   const { data, fetchNextPage, hasNextPage, refetch, isLoading } = useFetchNews({
     q: debounced || 'react',
   });
+
   let queryClient = useQueryClient();
   useEffect(() => {
     queryClient.removeQueries('news');
     refetch({ refetchPage: (page, index) => index === 0 });
   }, [debounced]);
-
+  const setArticles = useStore((state) => state.setArticles);
+  useEffect(() => {
+    if (data?.pages?.length === 1) {
+      setArticles(data?.pages[0]?.docs);
+    } else {
+      setArticles(data?.pages?.reduce((acc, page) => [...acc, ...page.docs], []));
+    }
+  }, [data?.pages]);
   return (
     <div className=' flex flex-col justify-center items-center mx-3 md:mx-0'>
       <input
