@@ -10,5 +10,8 @@ export const useFetchNews = (params) => {
         return lastPage.meta.offset / 10 + 1;
       }
     },
+    onError: (err) => {
+      console.log(err);
+    },
   });
 };
