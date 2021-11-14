@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { useStore } from '../../store';
 import imageDefault from '../../assets/ArticleDefault.jpg';
 
 import { image_url } from '../../constants';
+
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  TwitterShareButton,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from 'react-share';
 
 export default function index() {
   const [headline, setHeadline] = useState('');
@@ -30,10 +39,21 @@ export default function index() {
   }, [filteredArticle]);
 
   return (
-    <div className='w-1/2 mx-auto shadow-md rounded py-2 px-8 flex flex-col justify-center mt-5'>
+    <div className='md:w-1/2 md:mx-auto mx-4 shadow-md rounded py-2 px-8 flex flex-col justify-center mt-5'>
       <img className='rounded my-4  px-10' src={image} />
       <h1 className='font-bold '>{headline}</h1>
-      <h1 className='font-light text-sm'>{catergory}</h1>
+      <div className='flex items-center'>
+        <h1 className='font-light text-sm'>{catergory}</h1>
+        <FacebookShareButton title={headline} url={window.location.href} className='ml-10'>
+          <FacebookIcon className='w-8 rounded-lg' />
+        </FacebookShareButton>
+        <TwitterShareButton title={headline} url={window.location.href} className='ml-2'>
+          <TwitterIcon className='w-8 rounded-lg' />
+        </TwitterShareButton>
+        <LinkedinShareButton title={headline} url={window.location.href} className='ml-2'>
+          <LinkedinIcon className='w-8 rounded-lg' />
+        </LinkedinShareButton>
+      </div>
       <p className='my-4'>{paragraph}</p>
     </div>
   );

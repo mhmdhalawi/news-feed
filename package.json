@@ -16,6 +16,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-query": "^3.32.1",
     "react-router-dom": "^6.0.2",
+    "react-share": "^4.4.0",
     "zustand": "^3.6.5"
   },
   "devDependencies": {
