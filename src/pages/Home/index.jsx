@@ -34,7 +34,7 @@ export default function Home() {
     } else {
       setArticles(data?.pages?.reduce((acc, page) => [...acc, ...page.docs], []));
     }
-  }, [data?.pages]);
+  }, [data?.pages?.length]);
   return (
     <div className=' flex flex-col justify-center items-center mx-3 md:mx-0'>
       <input

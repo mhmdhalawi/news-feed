@@ -30,11 +30,11 @@ export default function index() {
   }, [filteredArticle]);
 
   return (
-    <div className='w-1/2 mx-auto'>
-      <img src={image} />
-      <h1>{headline}</h1>
-      <h1>{catergory}</h1>
-      <p>{paragraph}</p>
+    <div className='w-1/2 mx-auto shadow-md rounded py-2 px-8 flex flex-col justify-center mt-5'>
+      <img className='rounded my-4  px-10' src={image} />
+      <h1 className='font-bold '>{headline}</h1>
+      <h1 className='font-light text-sm'>{catergory}</h1>
+      <p className='my-4'>{paragraph}</p>
     </div>
   );
 }
